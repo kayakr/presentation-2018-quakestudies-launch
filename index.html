@@ -1,49 +1,194 @@
 <!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<html lang="en">
 
-		<title>reveal.js</title>
+    <head>
+        <meta charset="utf-8">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+        <title>Migrating QuakeStudies to Islandora - NDF 2017</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+        <meta name="author" content="Catalyst">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/catalyst.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <!-- <link rel="stylesheet" href="lib/css/zenburn.css"> -->
+        <link rel="stylesheet" href="lib/css/catalyst-syntax.css">
+
+        <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+        <script>
+            if( window.location.search.match( /print-pdf/gi ) ) {
+                var link = document.createElement( 'link' );
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+                document.getElementsByTagName( 'head' )[0].appendChild( link );
+            }
+        </script>
+
+        <style>
+            /* Add the ability to omit slides from the printed version (has to be after the print include)*/
+            @media print {
+                .reveal .slides section.no-print {
+                    display: none !important;
+                    visibility: hidden !important;
+                }
+            }
+        </style>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+
+        <!-- Please put any custom styles here -->
+        <link rel="stylesheet" href="css/presentation-ndf-2017.css">
+        <style>
+
+        </style>
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <!-- Cover slide -->
+                <section>
+                    <h3>QuakeStudies2</h3>
+                    <!--<h1 class="uc-quakestudies-logo">UC QuakeStudies</h1> <h1 class="catalyst-logo">Catalyst</h1>-->
+                    <p class="small-text">
+                        Jonathan Hunt (jhunt@catalyst.net.nz)
+                    </p>
+                </section>
+
+                  <section>
+                    <h3>What is Islandora?</h3>
+                    <ul>
+                      <li>Digital collection management</li>
+                      <li>Institutional repository</li>
+                      <li>Research data managemengt</li>
+                      <li>(Drupal CMS, Fedora Commons, Solr)</li>
+                    </ul>
+                  </section>
+
+                  <section>
+                    <h3>Global community</h3>
+                    <ul>
+                      <li>Simon Fraser University</li>
+                      <li>University of Sydney</li>
+                      <li>University of Rochester</li>
+                      <li>University of Prince Edward Island</li>
+                      <li>also, NASA...</li>
+                    </ul>
+                  </section>
+
+                  <section>
+                    <h3>What was done?</h3>
+                    <ul>
+                      <li>Responsive theme, in-page viewers</li>
+                      <li>Simplified data model (RDF, linked data)</li>
+                      <li>>150,000 objects, 1.3TB, VPN, transcoding, etc.</li>
+                      <li>Community code</li>
+                      <li>Automated deployment</li>
+                    </ul>
+
+                  </section>
+
+                  <section>
+                      <h3>RDF</h3>
+                    <ul>
+                <li>DC: dc:subject, dc:date, dc:description, etc.</li>
+                <li>DCTERMS: dcterms:spatial, dcterms:temporal</li>
+                <li>schema.org: schema:url</li>
+                <li>DNZ: Usage (hard to derive, so allow direct selection of DigitalNZ options)</li>
+                <li>QSR: Creator Credit - free text</li>
+              </ul>
+                    </section>
+
+                 <section>
+                      <h3>RDF</h3>
+                    <ul>
+                <li>DC: dc:subject, dc:date, dc:description, etc.</li>
+                <li>DCTERMS: dcterms:spatial, dcterms:temporal</li>
+                <li>schema.org: schema:url</li>
+                <li>DNZ: Usage (hard to derive, so allow direct selection of DigitalNZ options)</li>
+                <li>QSR: Creator Credit - free text</li>
+              </ul>
+                    </section>
+
+              <section>
+              <h3 style="position: relative; top:-1em;">Future for QuakeStudies</h3>
+              <ul style="position: relative; top:-1em;">
+                <li>Maps, spatial search</li>
+                <li>LINZ Street address lookup</li>
+                <li>Improved displays for content</li>
+                <li>Islandora 7.x-1.10 released just before Xmas</li>
+                <li>API use</li>
+                <li>Citation support</li>
+                <li>more collections, RDM</li>
+              </ul>
+            </section>
+
+
+            </div>
+
+            <div class="footer">
+                <div class="scarf">
+                    <div class="scarf-orange"></div>
+                    <div class="scarf-yellow"></div>
+                    <div class="scarf-blue"></div>
+                    <div class="scarf-green"></div>
+                </div>
+                <div class="footer-inner">
+                    <div class="uc-quakestudies-logo-footer">UC QuakeStudies</div>
+                    <!--<img src="../img/logo-quakestudies.svg"/>-->
+                    <div class="catalyst-logo-footer">Catalyst</div>
+                    <!-- NOTE: use only one of these. open-source-technologists is the standard -->
+                    <div class="open-source-technologists">open source technologists</div>
+                    <!-- <div class="freedom-to-innovate">freedom to innovate</div> -->
+                </div>
+            </div>
+        </div>
+
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Parallax scrolling
+                // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                // parallaxBackgroundSize: '2100px 900px',
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
 </html>
